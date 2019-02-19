@@ -776,3 +776,6 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
   require $_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR'] . '/loc_buildamodule_dev_prep_dd.inc';
 }
 // </DDSETTINGS>
+
+$class_loader->addPsr4('Drupal\\webprofiler\\', [ __DIR__ . '/../../modules/contrib/devel/webprofiler/src']);
+$settings['container_base_class'] = '\Drupal\webprofiler\DependencyInjection\TraceableContainer';
