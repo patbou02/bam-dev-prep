@@ -131,6 +131,21 @@ class Page {
 	}
 }
 
+class PrintedPage extends Page {
+
+	function theme() {
+		return '
+      <html>
+        <head>
+          <title>FOR PRINT: ' . $this->title . '</title>
+        </head>
+        <body>
+          <div style="width:800px;border:5px solid black;margin-left:auto;margin-right:auto;padding:20px;">' . $this->output . '</div>
+        </body>
+      </html>';
+	}
+}
+
 class Validator {
 
 	static function notEmpty($value) {
@@ -171,8 +186,12 @@ class Builder {
 }
 
 class ContactUsController {
-	static function contactUsPage($page_elements) {
-		$page = new Page($page_elements, 'Contact us');
+	static function ContactUsPage($page_elements) {
+		if (isset($_GET['print'])) {
+			$page = new PrintedPage($page_elements, 'Contact Us');
+		} else {
+			$page = new Page($page_elements, 'Contact Us');
+		}
 		$page->build();
 		return $page->theme();
 	}
@@ -233,4 +252,4 @@ $page_elements = array(
 	),
 );
 
-print ContactUsController::contactUsPage($page_elements);
+print ContactUsController::ContactUsPage($page_elements);
