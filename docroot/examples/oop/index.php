@@ -135,7 +135,7 @@ class PrintedPage extends Page {
 
 	function theme() {
 		return '
-      <html>
+      <html lang="en">
         <head>
           <title>FOR PRINT: ' . $this->title . '</title>
         </head>
